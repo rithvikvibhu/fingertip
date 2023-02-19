@@ -317,7 +317,7 @@ func NewApp(appConfig *config.App) (*App, error) {
 	app.proxyURL = config.GetProxyURL(usrConfig.ProxyAddr)
 	app.usrConfig = &usrConfig
 
-	if hnsProc, err = proc.NewHNSProc(appConfig.DNSProcPath, usrConfig.RootAddr, usrConfig.RecursiveAddr); err != nil {
+	if hnsProc, err = proc.NewHNSProc(appConfig.DNSProcPath, usrConfig.RootAddr, usrConfig.RecursiveAddr, appConfig.Path); err != nil {
 		return nil, err
 	}
 	hnsProc.SetUserAgent("fingertip:" + Version)
