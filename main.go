@@ -251,13 +251,13 @@ func main() {
 			case <-ticker.C:
 				if !app.proc.Started() {
 					ui.Data.SetBlockHeight("--")
-					app.config.Debug.SetBlockHeight(0)
+					app.config.Debug.SetChainInfo(0, 0)
 					continue
 				}
 
-				height := app.proc.GetHeight()
-				ui.Data.SetBlockHeight(fmt.Sprintf("#%d", height))
-				app.config.Debug.SetBlockHeight(height)
+				height, progress := app.proc.GetChainInfo()
+				ui.Data.SetBlockHeight(fmt.Sprintf("#%d (%.2f%%)", height, progress*100))
+				app.config.Debug.SetChainInfo(height, progress)
 			}
 
 		}
