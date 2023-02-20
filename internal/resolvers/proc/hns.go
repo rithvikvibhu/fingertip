@@ -31,7 +31,7 @@ type HNSProc struct {
 }
 
 func NewHNSProc(procPath string, rootAddr, recursiveAddr string, configPath string) (*HNSProc, error) {
-	args := []string{"--ns-host", rootAddr, "--rs-host", recursiveAddr, "--pool-size", "4", "-x", configPath}
+	args := []string{"--ns-host", rootAddr, "--rs-host", recursiveAddr, "--pool-size", "4", "-t", "-x", configPath}
 
 	if !strings.HasSuffix(procPath, processExtension) {
 		procPath += processExtension
