@@ -114,7 +114,7 @@ func (h *HNSProc) goRefreshStatus() {
 		for range ticker.C {
 			if !h.procStarted {
 				ticker.Stop()
-				continue
+				break
 			}
 
 			// Create DNS Query
