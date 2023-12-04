@@ -232,7 +232,7 @@ func (h *HNSProc) Synced() bool {
 	h.RLock()
 	defer h.RUnlock()
 
-	return h.progress == 1
+	return h.progress >= 0.999
 }
 
 func (h *HNSProc) Start(stopErr chan<- error) {
