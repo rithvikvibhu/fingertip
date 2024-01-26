@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
-	"github.com/buffrr/letsdane"
+	"github.com/randomlogin/sane"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -26,8 +26,8 @@ type App struct {
 	Path        string
 	CertPath    string
 	keyPath     string
-	DNSProcPath string
-	Proxy       letsdane.Config
+	// DNSProcPath string
+	Proxy       sane.Config
 	ProxyAddr   string
 	Version     string
 
@@ -57,7 +57,7 @@ func (c *App) getOrCreateCA() (string, string, error) {
 
 	if _, err := os.Stat(certPath); err != nil {
 		if _, err := os.Stat(keyPath); err != nil {
-			ca, priv, err := letsdane.NewAuthority(CertName, CertName, 365*24*time.Hour, nameConstraints)
+			ca, priv, err := sane.NewAuthority(CertName, CertName, 365*24*time.Hour, nameConstraints)
 			if err != nil {
 				return "", "", fmt.Errorf("couldn't generate CA: %v", err)
 			}
@@ -178,6 +178,8 @@ func NewConfig() (*App, error) {
 	c.Proxy.Verbose = false
 	c.Proxy.Validity = time.Hour
 	c.Proxy.ContentHandler = &contentHandler{c}
+	c.Proxy.Verbose = true
+	c.Proxy.RootsPath = path.Join(c.Path, "roots.json")
 	if c.Proxy.Certificate, c.Proxy.PrivateKey, err = c.loadCA(); err != nil {
 		return nil, fmt.Errorf("failed creating config: %v", err)
 	}
