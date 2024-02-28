@@ -468,6 +468,8 @@ github.com/prometheus/tsdb v0.7.1 h1:YZcsG11NqnK4czYLrWd9mpEuAJIHVQLwdrleYfszMAA
 github.com/prometheus/tsdb v0.7.1/go.mod h1:qhTCs0VvXwvX/y3TZrWD7rabWM+ijKTux40TwIPHuXU=
 github.com/randomlogin/sane v0.0.2 h1:rWnVhAOJt8h4dyyCNI4AQdEUPrl7JWoo0dsg82/IFgk=
 github.com/randomlogin/sane v0.0.2/go.mod h1:HPQHPiYP6lIs+7yjaJVnohnv5kHHif7lrsWp/JVUFcc=
+github.com/randomlogin/sane v0.0.3-0.20240214015449-25817feea1bb h1:PJTU2XOK9mpJeckmYYctf9AKqp4gfmljmfgmJgdfVe8=
+github.com/randomlogin/sane v0.0.3-0.20240214015449-25817feea1bb/go.mod h1:HPQHPiYP6lIs+7yjaJVnohnv5kHHif7lrsWp/JVUFcc=
 github.com/retailnext/hllpp v1.0.1-0.20180308014038-101a6d2f8b52/go.mod h1:RDpi1RftBQPUCDRw6SmxeaREsAaRKnOclghuzp/WRzc=
 github.com/rjeczalik/notify v0.9.1 h1:CLCKso/QK1snAlnhNR/CNvNiFU2saUtjV0bx3EwNeCE=
 github.com/rjeczalik/notify v0.9.1/go.mod h1:rKwnCoCGeuQnwBtTSPL9Dad03Vh2n40ePRrjvIXnJho=

@@ -10,7 +10,6 @@ require (
 	github.com/getlantern/systray v1.1.0
 	github.com/miekg/dns v1.1.43
 	github.com/pkg/browser v0.0.0-20210706143420-7d21f8c997e2
-	github.com/randomlogin/sane v0.0.2
 	github.com/spf13/viper v1.8.1
 	github.com/sqweek/dialog v0.0.0-20210702151303-c326b49d3f01
 	golang.org/x/crypto v0.16.0
@@ -276,6 +275,7 @@ require (
 	github.com/prometheus/common v0.6.0 // indirect
 	github.com/prometheus/procfs v0.0.2 // indirect
 	github.com/prometheus/tsdb v0.7.1 // indirect
+	github.com/randomlogin/sane v0.0.3-0.20240214015449-25817feea1bb // indirect
 	github.com/retailnext/hllpp v1.0.1-0.20180308014038-101a6d2f8b52 // indirect
 	github.com/rjeczalik/notify v0.9.1 // indirect
 	github.com/rogpeppe/fastuuid v1.2.0 // indirect
