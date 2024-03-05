@@ -7,7 +7,7 @@ toolchain go1.21.5
 require (
 	github.com/emersion/go-autostart v0.0.0-20210130080809-00ed301c8e9a
 	github.com/ethereum/go-ethereum v1.13.14
-	github.com/getlantern/systray v1.2.2
+	github.com/getlantern/systray v1.1.0
 	github.com/miekg/dns v1.1.58
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/randomlogin/sane v0.0.6
