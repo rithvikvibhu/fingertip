@@ -458,10 +458,8 @@ github.com/prometheus/procfs v0.0.0-20181005140218-185b4288413d/go.mod h1:c3At6R
 github.com/prometheus/procfs v0.0.2/go.mod h1:TjEm7ze935MbeOT/UhFTIMYKhuLP4wbCsTZCD3I8kEA=
 github.com/prometheus/tsdb v0.7.1 h1:YZcsG11NqnK4czYLrWd9mpEuAJIHVQLwdrleYfszMAA=
 github.com/prometheus/tsdb v0.7.1/go.mod h1:qhTCs0VvXwvX/y3TZrWD7rabWM+ijKTux40TwIPHuXU=
-github.com/randomlogin/sane v0.0.2 h1:rWnVhAOJt8h4dyyCNI4AQdEUPrl7JWoo0dsg82/IFgk=
-github.com/randomlogin/sane v0.0.2/go.mod h1:HPQHPiYP6lIs+7yjaJVnohnv5kHHif7lrsWp/JVUFcc=
-github.com/randomlogin/sane v0.0.4 h1:9IhNDauVMfgkajickCCv636s4NYvlddMFgtBSTFyz70=
-github.com/randomlogin/sane v0.0.4/go.mod h1:HPQHPiYP6lIs+7yjaJVnohnv5kHHif7lrsWp/JVUFcc=
+github.com/randomlogin/sane v0.0.5-0.20240305003709-08938d1b0c6f h1:W49H8zSJVTLuzG2TNeatKR6AaFk6GAAc10biWA47+uk=
+github.com/randomlogin/sane v0.0.5-0.20240305003709-08938d1b0c6f/go.mod h1:HPQHPiYP6lIs+7yjaJVnohnv5kHHif7lrsWp/JVUFcc=
 github.com/retailnext/hllpp v1.0.1-0.20180308014038-101a6d2f8b52/go.mod h1:RDpi1RftBQPUCDRw6SmxeaREsAaRKnOclghuzp/WRzc=
 github.com/rjeczalik/notify v0.9.1 h1:CLCKso/QK1snAlnhNR/CNvNiFU2saUtjV0bx3EwNeCE=
 github.com/rjeczalik/notify v0.9.1/go.mod h1:rKwnCoCGeuQnwBtTSPL9Dad03Vh2n40ePRrjvIXnJho=
