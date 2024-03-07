@@ -25,6 +25,9 @@ jobs:
           update: true
           install: git mingw-w64-x86_64-toolchain base-devel mingw-w64-x86_64-unbound autotools
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Build hnsd
         run: |
           shopt -s extglob
