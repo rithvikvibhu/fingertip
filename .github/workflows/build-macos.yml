@@ -55,23 +55,20 @@ jobs:
           ./builds/macos/build.sh
           ls -l builds/macos
 
-      - name: Package as AppImage
-        working-directory: ./builds/linux
+      - name: Create DMG
+        working-directory: ./builds/macos
         run: |
-          ls -l appdir/usr/bin/
-          chmod +x appdir/usr/bin/hnsd
-          wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-          chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-          ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/fingertip.desktop -appimage -executable=appdir/usr/bin/hnsd
+          hdiutil create -format UDZO -srcfolder ./Fingertip.app ./Fingertip.dmg
+          ls -l
 
       - name: Store fingertip binary
         uses: actions/upload-artifact@v4
         with:
           name: fingertip-bin
-          path: ./builds/linux/appdir/usr/bin/fingertip
+          path: ./builds/macos/Fingertip.app/Contents/MacOS/fingertip
 
-      - name: Store fingertip appimage
+      - name: Store fingertip dmg
         uses: actions/upload-artifact@v4
         with:
-          name: fingertip-appimage
-          path: ./builds/linux/Fingertip*.AppImage
+          name: fingertip-dmg
+          path: ./builds/macos/Fingertip.dmg
