@@ -23,7 +23,7 @@ jobs:
 
       - name: Build hnsd
         run: |
-          ./autogen.sh && ./configure && make
+          ./autogen.sh && ./configure --with-unbound=/opt/homebrew && make
           ls -l
 
       - name: Store hnsd binary
