@@ -1,6 +1,7 @@
 name: Build and Package - Windows
 
-on: [push, pull_request, workflow_dispatch]
+# on: [push, pull_request, workflow_dispatch]
+on: [workflow_dispatch]
 
 jobs:
   build-hnsd:
@@ -19,7 +20,8 @@ jobs:
           update: true
           install: git mingw-w64-x86_64-toolchain base-devel mingw-w64-x86_64-unbound autotools
 
-      - run: git config --global core.autocrlf input
+      - name: Set git autocrlf
+        run: git config --global core.autocrlf input
         shell: bash
 
       - name: Checkout hnsd repository
@@ -27,9 +29,6 @@ jobs:
         with:
           repository: 'handshake-org/hnsd'
           ref: master
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
 
       - name: Build hnsd
         run: |
