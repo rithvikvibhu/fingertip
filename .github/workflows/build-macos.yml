@@ -1,4 +1,4 @@
-name: Build and Package - Linux
+name: Build and Package - MacOS
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -51,7 +51,7 @@ jobs:
 
       - name: Build fingertip
         run: |
-          dylibbundler -od -b -x builds/macos/Fingertip.app/Contents/MacOS -d builds/macos/Fingertip.app/Contents/Frameworks -p @executable_path/../Frameworks/
+          dylibbundler -od -b -x builds/macos/Fingertip.app/Contents/MacOS/hnsd -d builds/macos/Fingertip.app/Contents/Frameworks -p @executable_path/../Frameworks/
           ./builds/macos/build.sh
           ls -l builds/macos
 
