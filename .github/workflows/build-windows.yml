@@ -1,0 +1,67 @@
+name: Build and Package - Windows
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build-hnsd:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - name: Checkout hnsd repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'handshake-org/hnsd'
+          ref: master
+
+      - name: Setup mysys2 and install dependencies
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          path-type: inherit
+          update: true
+          install: git mingw-w64-x86_64-toolchain base-devel mingw-w64-x86_64-unbound autotools
+
+      - name: Build hnsd
+        run: |
+          ./autogen.sh && ./configure && make
+          ls -l
+
+      - name: Store hnsd binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: hnsd-bin
+          path: ./hnsd.exe
+
+  build-fingertip:
+    needs: build-hnsd
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Build fingertip
+        run: |
+          go build -trimpath -o ./builds/windows/  -ldflags "-H windowsgui"
+          dir builds/windows
+
+      - name: Download hnsd binary
+        uses: actions/download-artifact@v4
+        with:
+          name: hnsd-bin
+          path: builds/windows
+
+      - name: Store fingertip binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: fingertip-bin
+          path: ./builds/windows/fingertip.exe
