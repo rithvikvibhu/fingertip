@@ -1,0 +1,79 @@
+name: Build and Package - MacOS (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+
+jobs:
+  build-hnsd:
+    runs-on: ${{inputs.os}}
+
+    steps:
+      - name: Checkout hnsd repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'handshake-org/hnsd'
+          ref: master
+
+      - name: Install dependencies
+        run: brew install automake autoconf libtool unbound
+
+      - name: Build hnsd
+        run: |
+          ./autogen.sh && ./configure && make
+          ls -l
+
+      - name: Store hnsd binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: hnsd-bin-{{inputs.os}}
+          path: ./hnsd
+
+  build-fingertip:
+    needs: build-hnsd
+    runs-on: ${{inputs.os}}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Install dependencies
+        run: brew install dylibbundler git automake autoconf libtool unbound
+
+      - name: Download hnsd binary
+        uses: actions/download-artifact@v4
+        with:
+          name: hnsd-bin-{{inputs.os}}
+          path: builds/macos/Fingertip.app/Contents/MacOS
+
+      - name: Build fingertip
+        run: |
+          dylibbundler -od -b -x builds/macos/Fingertip.app/Contents/MacOS/hnsd -d builds/macos/Fingertip.app/Contents/Frameworks -p @executable_path/../Frameworks/
+          ./builds/macos/build.sh
+          ls -l builds/macos
+
+      - name: Create DMG
+        working-directory: ./builds/macos
+        run: |
+          hdiutil create -format UDZO -srcfolder ./Fingertip.app ./Fingertip.dmg
+          ls -l
+
+      - name: Store fingertip binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: fingertip-bin-{{inputs.os}}
+          path: ./builds/macos/Fingertip.app/Contents/MacOS/fingertip
+
+      - name: Store fingertip dmg
+        uses: actions/upload-artifact@v4
+        with:
+          name: fingertip-dmg-{{inputs.os}}
+          path: ./builds/macos/Fingertip.dmg
