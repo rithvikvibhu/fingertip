@@ -31,14 +31,14 @@ RECURSIVE_ADDRESS=127.0.0.1:9592
 Go 1.16+ is required.
 
 ```
-$ git clone https://github.com/buffrr/fingertip
+$ git clone https://github.com/randomlogin/fingertip
 ```
 
 ### MacOS
 
 ```
 $ brew install dylibbundler git automake autoconf libtool unbound
-$ git clone https://github.com/imperviousinc/fingertip
+$ git clone https://github.com/randomlogin/fingertip
 $ cd fingertip && ./builds/macos/build.sh
 ```
 
@@ -67,8 +67,3 @@ Follow [hnsd](https://github.com/handshake-org/hnsd) build instructions for Linu
 $ go build -trimpath -o ./builds/linux/appdir/usr/bin/
 ```
 
-
-## Credits
-Fingertip uses [hnsd](https://github.com/handshake-org/hnsd) a lightweight Handshake resolver, [letsdane](https://github.com/buffrr/letsdane) for TLS support and [go-ethereum](https://github.com/ethereum/go-ethereum) for .eth and Ethereum [HIP-5](https://github.com/handshake-org/HIPs/blob/master/HIP-0005.md) lookups.
-
-The name "fingertip" was stolen from [@pinheadmz](https://github.com/pinheadmz)
