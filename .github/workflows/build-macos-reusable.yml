@@ -29,8 +29,9 @@ jobs:
       - name: Store hnsd binary
         uses: actions/upload-artifact@v4
         with:
-          name: hnsd-bin-{{inputs.os}}
+          name: hnsd-bin-${{inputs.os}}
           path: ./hnsd
+          if-no-files-found: error
 
   build-fingertip:
     needs: build-hnsd
@@ -51,7 +52,7 @@ jobs:
       - name: Download hnsd binary
         uses: actions/download-artifact@v4
         with:
-          name: hnsd-bin-{{inputs.os}}
+          name: hnsd-bin-${{inputs.os}}
           path: builds/macos/Fingertip.app/Contents/MacOS
 
       - name: Build fingertip
@@ -69,11 +70,13 @@ jobs:
       - name: Store fingertip binary
         uses: actions/upload-artifact@v4
         with:
-          name: fingertip-bin-{{inputs.os}}
+          name: fingertip-bin-${{inputs.os}}
           path: ./builds/macos/Fingertip.app/Contents/MacOS/fingertip
+          if-no-files-found: error
 
       - name: Store fingertip dmg
         uses: actions/upload-artifact@v4
         with:
-          name: fingertip-dmg-{{inputs.os}}
+          name: fingertip-dmg-${{inputs.os}}
           path: ./builds/macos/Fingertip.dmg
+          if-no-files-found: error

@@ -27,6 +27,7 @@ jobs:
         with:
           name: hnsd-bin
           path: ./hnsd
+          if-no-files-found: error
 
   build-fingertip:
     needs: build-hnsd
@@ -69,9 +70,11 @@ jobs:
         with:
           name: fingertip-bin
           path: ./builds/linux/appdir/usr/bin/fingertip
+          if-no-files-found: error
 
       - name: Store fingertip appimage
         uses: actions/upload-artifact@v4
         with:
           name: fingertip-appimage
           path: ./builds/linux/Fingertip*.AppImage
+          if-no-files-found: error

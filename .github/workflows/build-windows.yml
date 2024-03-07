@@ -40,6 +40,7 @@ jobs:
         with:
           name: hnsd-bin
           path: ./hnsd.exe
+          if-no-files-found: error
 
   build-fingertip:
     needs: build-hnsd
@@ -70,3 +71,4 @@ jobs:
         with:
           name: fingertip-bin
           path: ./builds/windows/fingertip.exe
+          if-no-files-found: error
