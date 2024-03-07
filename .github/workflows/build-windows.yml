@@ -27,6 +27,7 @@ jobs:
 
       - name: Build hnsd
         run: |
+          shopt -s extglob
           ./autogen.sh && ./configure && make
           ls -l
 
