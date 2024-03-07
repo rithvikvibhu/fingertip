@@ -51,8 +51,8 @@ jobs:
 
       - name: Build fingertip
         run: |
-          ./builds/macos/build.sh
           dylibbundler -od -b -x builds/macos/Fingertip.app/Contents/MacOS -d builds/macos/Fingertip.app/Contents/Frameworks -p @executable_path/../Frameworks/
+          ./builds/macos/build.sh
           ls -l builds/macos
 
       - name: Package as AppImage
