@@ -11,12 +11,6 @@ jobs:
         shell: msys2 {0}
 
     steps:
-      - name: Checkout hnsd repository
-        uses: actions/checkout@v4
-        with:
-          repository: 'handshake-org/hnsd'
-          ref: master
-
       - name: Setup mysys2 and install dependencies
         uses: msys2/setup-msys2@v2
         with:
@@ -25,12 +19,20 @@ jobs:
           update: true
           install: git mingw-w64-x86_64-toolchain base-devel mingw-w64-x86_64-unbound autotools
 
+      - run: git config --global core.autocrlf input
+        shell: bash
+
+      - name: Checkout hnsd repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'handshake-org/hnsd'
+          ref: master
+
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
 
       - name: Build hnsd
         run: |
-          shopt -s extglob
           ./autogen.sh && ./configure && make
           ls -l
 
