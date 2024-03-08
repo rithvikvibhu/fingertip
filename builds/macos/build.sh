@@ -16,7 +16,7 @@ if [ ! -e "$hnsd_path" ]; then
 
 echo "Cloning hnsd ..."
 tmp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'fingertip_hnsd')
-git clone https://github.com/randomlogin/hnsd "$tmp_dir"
+git clone https://github.com/handshake-org/hnsd "$tmp_dir"
 cd "$tmp_dir" || exit
 
 echo "Building hnsd ..."

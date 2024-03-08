@@ -348,7 +348,6 @@ func getProcPath() (string, error) {
 }
 
 func init() {
-	// letsdane shows the version name
 	// in the footer on errors
 	// 0.6.1 is the version used in go.mod
 	sane.Version = fmt.Sprintf("0.6.1 - fingertip (v%s)", Version)

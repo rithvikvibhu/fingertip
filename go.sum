@@ -564,6 +564,8 @@ github.com/randomlogin/sane v0.0.5-0.20240305003709-08938d1b0c6f h1:W49H8zSJVTLu
 github.com/randomlogin/sane v0.0.5-0.20240305003709-08938d1b0c6f/go.mod h1:HPQHPiYP6lIs+7yjaJVnohnv5kHHif7lrsWp/JVUFcc=
 github.com/randomlogin/sane v0.0.6 h1:gaT1oGwbaVxqhaO6VI+wjVD/RD3OP2FI2b8p6Au3IMA=
 github.com/randomlogin/sane v0.0.6/go.mod h1:HPQHPiYP6lIs+7yjaJVnohnv5kHHif7lrsWp/JVUFcc=
+github.com/randomlogin/sane v0.0.7-0.20240308001710-fca224cc5791 h1:RsEqtZKIPc6B3SGSX29nm50d960HcXu4gLF8GsE/SuU=
+github.com/randomlogin/sane v0.0.7-0.20240308001710-fca224cc5791/go.mod h1:HPQHPiYP6lIs+7yjaJVnohnv5kHHif7lrsWp/JVUFcc=
 github.com/retailnext/hllpp v1.0.1-0.20180308014038-101a6d2f8b52/go.mod h1:RDpi1RftBQPUCDRw6SmxeaREsAaRKnOclghuzp/WRzc=
 github.com/rjeczalik/notify v0.9.1 h1:CLCKso/QK1snAlnhNR/CNvNiFU2saUtjV0bx3EwNeCE=
 github.com/rjeczalik/notify v0.9.1/go.mod h1:rKwnCoCGeuQnwBtTSPL9Dad03Vh2n40ePRrjvIXnJho=
