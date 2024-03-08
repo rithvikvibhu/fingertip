@@ -31,14 +31,14 @@ RECURSIVE_ADDRESS=127.0.0.1:9592
 Go 1.16+ is required.
 
 ```
-$ git clone https://github.com/randomlogin/fingertip
+$ git clone https://github.com/imperviousinc/fingertip
 ```
 
 ### MacOS
 
 ```
 $ brew install dylibbundler git automake autoconf libtool unbound
-$ git clone https://github.com/randomlogin/fingertip
+$ git clone https://github.com/imperviousinc/fingertip
 $ cd fingertip && ./builds/macos/build.sh
 ```
 
