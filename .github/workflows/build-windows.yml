@@ -1,7 +1,7 @@
 name: Build and Package - Windows
 
-# on: [push, pull_request, workflow_dispatch]
-on: [workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
+# on: [workflow_dispatch]
 
 jobs:
   build-hnsd:
