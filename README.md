@@ -2,7 +2,7 @@
 
 **Note:** This project is experimental use at your own risk.
 
-Fingertip is a menubar app that runs a [lightweight decentralized resolver](https://github.com/handshake-org/hnsd) to resolve names from the [Handshake](https://handshake.org) root zone. It can also resolve names from external namespaces such as the Ethereum Name System. Fingertip integrates with [letsdane](https://github.com/buffrr/letsdane) to provide TLS support without relying on a centralized certificate authority. 
+Fingertip is a menubar app that runs a [lightweight decentralized resolver](https://github.com/handshake-org/hnsd) to resolve names from the [Handshake](https://handshake.org) root zone. It can also resolve names from external namespaces such as the Ethereum Name System. Fingertip integrates with [sane](https://github.com/randomlogin/sane) to provide TLS support without relying on a centralized certificate authority. 
 
 
 <img width="600" src="https://user-images.githubusercontent.com/41967894/127166063-fedf072c-fa5e-45e3-acac-bfb46f256831.png" />
@@ -15,7 +15,7 @@ You can use a pre-built binary from releases or build your own from source.
 You can set these as environment variables prefixed with `FINGERTIP_` or store it in the app config directory as `fingertip.env`
 
 ```
-# letsdane proxy address
+# sane proxy address
 PROXY_ADDRESS=127.0.0.1:9590
 # hnsd root server address
 ROOT_ADDRESS=127.0.0.1:9591
@@ -67,3 +67,8 @@ Follow [hnsd](https://github.com/handshake-org/hnsd) build instructions for Linu
 $ go build -trimpath -o ./builds/linux/appdir/usr/bin/
 ```
 
+
+## Credits
+Fingertip uses [hnsd](https://github.com/handshake-org/hnsd) a lightweight Handshake resolver, [sane](https://github.com/randomlogin/sane) for TLS support and [go-ethereum](https://github.com/ethereum/go-ethereum) for .eth and Ethereum [HIP-5](https://github.com/handshake-org/HIPs/blob/master/HIP-0005.md) lookups.
+
+The name "fingertip" was stolen from [@pinheadmz](https://github.com/pinheadmz)
