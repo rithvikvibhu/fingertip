@@ -4,12 +4,13 @@ import (
 	"errors"
 	"fingertip/internal/resolvers"
 	"fmt"
-	"github.com/randomlogin/sane/resolver"
-	"github.com/miekg/dns"
 	"math/rand"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/miekg/dns"
+	"github.com/randomlogin/sane/resolver"
 )
 
 const (
@@ -59,11 +60,11 @@ type DebugInfo struct {
 // and ask it for the address of "isc.org":
 //
 // Some possible cases:
-// 1. The request fails for some reason like times out ..etc
-//    which indicates a interference
-// 2. Receive a positive answer = probable interference
-// 3. Receive a referral to isc.org nameservers
-//    interference is unlikely
+//  1. The request fails for some reason like times out ..etc
+//     which indicates a interference
+//  2. Receive a positive answer = probable interference
+//  3. Receive a referral to isc.org nameservers
+//     interference is unlikely
 func testDNSInterference() error {
 	msg := new(dns.Msg)
 	msg.CheckingDisabled = true

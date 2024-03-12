@@ -6,7 +6,6 @@ import (
 	"fingertip/internal/config/auto"
 	"fingertip/internal/resolvers"
 
-	// "fingertip/internal/resolvers/proc"
 	"fingertip/internal/ui"
 	"fmt"
 	"log"
@@ -26,7 +25,6 @@ import (
 const Version = "0.0.3"
 
 type App struct {
-	// proc             *proc.HNSProc
 	server           *http.Server
 	config           *config.App
 	usrConfig        *config.User
@@ -155,17 +153,8 @@ func main() {
 		log.Fatal(err)
 	}
 	hnsdPath = path.Join(hnsdPath, "/hnsd")
-
-	hnsdCheckpointPath := ""
-	if hnsdPath == "" {
-		log.Fatal("path to hnsd is not provided")
-	}
-	if hnsdCheckpointPath == "" {
-		home, _ := os.UserHomeDir() //above already fails if it doesn't exist
-		hnsdCheckpointPath = path.Join(home, ".hnsd")
-	}
-
-	sync.GetRoots(hnsdPath, app.config.Path, hnsdCheckpointPath)
+	home, _ := os.UserHomeDir()
+	hnsdCheckpointPath := path.Join(home, ".hnsd")
 
 	start := func() {
 		ui.Data.SetOptionsEnabled(true)
@@ -188,6 +177,16 @@ func main() {
 
 			onBoarded = true
 		}()
+		app.config.Debug.SetCheckSynced(func() bool { return false }) //perhaps not the best way to show syncing status correctly
+		sync.GetRoots(hnsdPath, app.config.Path, hnsdCheckpointPath)
+		go func() {
+			for {
+				time.Sleep(24 * time.Hour)
+				sync.GetRoots(hnsdPath, app.config.Path, hnsdCheckpointPath)
+			}
+		}()
+		app.config.Debug.SetCheckSynced(func() bool { return true })
+
 	}
 
 	ui.OnStart = start
@@ -296,7 +295,6 @@ func (a *App) NewResolver() (resolver.Resolver, error) {
 	// Register HIP-5 handlers
 	hip5.RegisterHandler("_eth", ethExt.Handler)
 	hip5.SetQueryMiddleware(a.config.Debug.GetDNSProbeMiddleware())
-	// a.config.Debug.SetCheckSynced(a.proc.Synced)
 
 	return hip5, nil
 }
@@ -306,7 +304,6 @@ func (a *App) listen() error {
 }
 
 func (a *App) stop() {
-	// a.proc.Stop()
 	a.server.Close()
 
 	// on stop create a new server

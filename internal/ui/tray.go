@@ -4,8 +4,9 @@ import (
 	"fingertip/internal/config"
 	"fingertip/internal/ui/icon"
 	"fmt"
-	"github.com/getlantern/systray"
 	"sync"
+
+	"github.com/getlantern/systray"
 )
 
 var (
@@ -27,7 +28,6 @@ type State struct {
 	started     bool
 	runToggle   *systray.MenuItem
 	openAtLogin *systray.MenuItem
-	blockHeight *systray.MenuItem
 	options     *systray.MenuItem
 	quit        *systray.MenuItem
 
@@ -44,10 +44,6 @@ var stopTitle = fmt.Sprintf("%-35s", "Stop")
 func (s *State) SetBlockHeight(h string) {
 	s.Lock()
 	defer s.Unlock()
-	if s.blockHeight == nil {
-		return
-	}
-	s.blockHeight.SetTitle("Block height " + h)
 }
 
 func (s *State) Started() bool {
@@ -76,7 +72,6 @@ func (s *State) SetStarted(started bool) {
 		s.runToggle.SetTitle(stopTitle)
 	} else {
 		s.runToggle.SetTitle(startTitle)
-		s.blockHeight.SetTitle("Block height --")
 	}
 }
 
@@ -126,8 +121,6 @@ func (s *State) initMenu() {
 	s.openAtLogin = systray.AddMenuItemCheckbox("Open at login", "Open at login", false)
 
 	systray.AddSeparator()
-	s.blockHeight = systray.AddMenuItem("Block height --", "Block height")
-	s.blockHeight.Disable()
 
 	systray.AddSeparator()
 	s.options = systray.AddMenuItem("Options", "")
