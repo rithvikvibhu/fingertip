@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/randomlogin/sane"
+	"github.com/randomlogin/sane/tld"
 )
 
 const AppName = "Fingertip"
@@ -56,7 +57,7 @@ func (c *App) getOrCreateCA() (string, string, error) {
 
 	if _, err := os.Stat(certPath); err != nil {
 		if _, err := os.Stat(keyPath); err != nil {
-			ca, priv, err := sane.NewAuthority(CertName, CertName, 365*24*time.Hour, nameConstraints)
+			ca, priv, err := sane.NewAuthority(CertName, CertName, 365*24*time.Hour, tld.NameConstraints)
 			if err != nil {
 				return "", "", fmt.Errorf("couldn't generate CA: %v", err)
 			}
@@ -172,7 +173,7 @@ func NewConfig() (*App, error) {
 		return nil, fmt.Errorf("failed creating config: %v", err)
 	}
 
-	c.Proxy.Constraints = nameConstraints
+	c.Proxy.Constraints = tld.NameConstraints
 	c.Proxy.SkipNameChecks = false
 	c.Proxy.Validity = time.Hour
 	c.Proxy.ContentHandler = &contentHandler{c}
@@ -245,7 +246,7 @@ func (c *contentHandler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	if req.URL.Path == "/proxy.pac" {
 		rw.Header().Set("Content-Type", "application/x-ns-proxy-autoconfig")
 		var names []string
-		for n := range nameConstraints {
+		for n := range tld.NameConstraints {
 			names = append(names, n)
 		}
 		fmt.Fprint(rw, getPACScript(c.config.ProxyAddr, names))
@@ -271,6 +272,6 @@ func init() {
 	// https://datatracker.ietf.org/doc/html/rfc2606
 	var testNames = []string{"localhost", "test", "invalid", "example", "local"}
 	for _, name := range testNames {
-		nameConstraints[name] = struct{}{}
+		tld.NameConstraints[name] = struct{}{}
 	}
 }
