@@ -4,46 +4,46 @@ on: [push, pull_request, workflow_dispatch]
 # on: [workflow_dispatch]
 
 jobs:
-  # build-hnsd:
-  #   runs-on: windows-latest
+  build-hnsd:
+    runs-on: windows-latest
 
-  #   defaults:
-  #     run:
-  #       shell: msys2 {0}
+    defaults:
+      run:
+        shell: msys2 {0}
 
-  #   steps:
-  #     - name: Setup mysys2 and install dependencies
-  #       uses: msys2/setup-msys2@v2
-  #       with:
-  #         msystem: MINGW64
-  #         path-type: inherit
-  #         update: true
-  #         install: git mingw-w64-x86_64-toolchain base-devel mingw-w64-x86_64-unbound autotools
+    steps:
+      - name: Setup mysys2 and install dependencies
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          path-type: inherit
+          update: true
+          install: git mingw-w64-x86_64-toolchain base-devel mingw-w64-x86_64-unbound autotools
 
-  #     - name: Set git autocrlf
-  #       run: git config --global core.autocrlf input
-  #       shell: bash
+      - name: Set git autocrlf
+        run: git config --global core.autocrlf input
+        shell: bash
 
-  #     - name: Checkout hnsd repository
-  #       uses: actions/checkout@v4
-  #       with:
-  #         repository: 'handshake-org/hnsd'
-  #         ref: master
+      - name: Checkout hnsd repository
+        uses: actions/checkout@v4
+        with:
+          repository: 'handshake-org/hnsd'
+          ref: master
 
-  #     - name: Build hnsd
-  #       run: |
-  #         ./autogen.sh && ./configure && make
-  #         ls -l
+      - name: Build hnsd
+        run: |
+          ./autogen.sh && ./configure && make
+          ls -l
 
-  #     - name: Store hnsd binary
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: hnsd-bin
-  #         path: ./hnsd.exe
-  #         if-no-files-found: error
+      - name: Store hnsd binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: hnsd-bin
+          path: ./hnsd.exe
+          if-no-files-found: error
 
   build-fingertip:
-    # needs: build-hnsd
+    needs: build-hnsd
     runs-on: windows-latest
 
     steps:
@@ -54,14 +54,9 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.21'
-      
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
 
       - name: Install rsrc
-        # $env:GOBIN = "/mingw64/bin";
         env:
-          # GOBIN: /mingw64/bin
           GO111MODULE: off
         run: |
           # env
