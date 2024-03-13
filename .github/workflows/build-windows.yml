@@ -57,7 +57,9 @@ jobs:
 
       - name: Build fingertip
         run: |
-          go build -trimpath -o ./builds/windows/  -ldflags "-H windowsgui"
+          rsrc -arch amd64 -ico ./builds/windows/fingertip.ico -manifest builds/windows/manifest.xml -o ./rsrc.syso
+          go build -trimpath -o ./builds/windows/ -ldflags "-H windowsgui"
+          dir
           dir builds/windows
 
       - name: Download hnsd binary
@@ -65,10 +67,23 @@ jobs:
         with:
           name: hnsd-bin
           path: builds/windows
+      
+      - name: Package as msi
+        working-directory: ./builds/windows
+        run: |
+          go-msi make --msi fingertip.msi --version 0.0.1 --src templates --arch amd64
+          dir
 
       - name: Store fingertip binary
         uses: actions/upload-artifact@v4
         with:
           name: fingertip-bin
           path: ./builds/windows/fingertip.exe
+          if-no-files-found: error
+
+      - name: Store fingertip installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: fingertip-msi
+          path: ./builds/windows/*.msi
           if-no-files-found: error
