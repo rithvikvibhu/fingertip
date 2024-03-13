@@ -55,13 +55,14 @@ jobs:
         with:
           go-version: '1.21'
 
-      - name: Install rsrc
+      - name: Install rsrc and go-msi
         env:
           GO111MODULE: off
         run: |
           # env
           # go env
           go get github.com/akavel/rsrc
+          go get github.com/mh-cbon/go-msi
           # echo "go env GOPATH"
           # dir "$(go env GOPATH)"
           # echo "C:\Users\runneradmin\go\bin"
