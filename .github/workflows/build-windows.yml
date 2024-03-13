@@ -64,7 +64,10 @@ jobs:
           GOBIN: /mingw64/bin
         run: |
           env
+          go env
           go get github.com/akavel/rsrc
+          dir "$(go env GOPATH)"
+          dir C:\Users\runneradmin\go\
           rsrc -arch amd64 -ico ./builds/windows/fingertip.ico -manifest builds/windows/manifest.xml -o ./rsrc.syso
           go build -trimpath -o ./builds/windows/ -ldflags "-H windowsgui"
           dir
