@@ -61,8 +61,8 @@ jobs:
         run: |
           # env
           # go env
-          go install github.com/akavel/rsrc@latest
-          go install github.com/mh-cbon/go-msi@latest
+          go get github.com/akavel/rsrc
+          go get github.com/mat007/go-msi
           # echo "go env GOPATH"
           # dir "$(go env GOPATH)"
           # echo "C:\Users\runneradmin\go\bin"
