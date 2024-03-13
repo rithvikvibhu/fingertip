@@ -57,7 +57,8 @@ jobs:
 
       - name: Build fingertip
         run: |
-          go install github.com/akavel/rsrc
+          go get github.com/akavel/rsrc
+          export PATH=${PATH}:`go env GOPATH`/bin
           rsrc -arch amd64 -ico ./builds/windows/fingertip.ico -manifest builds/windows/manifest.xml -o ./rsrc.syso
           go build -trimpath -o ./builds/windows/ -ldflags "-H windowsgui"
           dir
