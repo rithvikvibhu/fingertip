@@ -65,8 +65,10 @@ jobs:
         run: |
           env
           go env
-          go install github.com/akavel/rsrc
+          go get github.com/akavel/rsrc@latest
+          echo "go env GOPATH"
           dir "$(go env GOPATH)"
+          echo "C:\Users\runneradmin\go\bin"
           dir C:\Users\runneradmin\go\bin
           rsrc -arch amd64 -ico ./builds/windows/fingertip.ico -manifest builds/windows/manifest.xml -o ./rsrc.syso
           go build -trimpath -o ./builds/windows/ -ldflags "-H windowsgui"
