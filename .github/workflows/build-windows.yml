@@ -58,10 +58,11 @@ jobs:
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
 
-      - name: Build fingertip
+      - name: Install rsrc
         # $env:GOBIN = "/mingw64/bin";
-        # env:
-        #   GOBIN: /mingw64/bin
+        env:
+          # GOBIN: /mingw64/bin
+          GO111MODULE: off
         run: |
           env
           go env
@@ -70,6 +71,10 @@ jobs:
           dir "$(go env GOPATH)"
           echo "C:\Users\runneradmin\go\bin"
           dir C:\Users\runneradmin\go\bin
+          rsrc.exe
+
+      - name: Build fingertip
+        run: |
           rsrc -arch amd64 -ico ./builds/windows/fingertip.ico -manifest builds/windows/manifest.xml -o ./rsrc.syso
           go build -trimpath -o ./builds/windows/ -ldflags "-H windowsgui"
           dir
