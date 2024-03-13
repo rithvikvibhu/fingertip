@@ -55,13 +55,14 @@ jobs:
         with:
           go-version: '1.21'
       
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
 
       - name: Build fingertip
         run: |
+          $env:GOBIN = "/mingw64/bin"
+          env
           go get github.com/akavel/rsrc
-          $env:PATH += ";$(go env GOPATH)\bin"
           rsrc -arch amd64 -ico ./builds/windows/fingertip.ico -manifest builds/windows/manifest.xml -o ./rsrc.syso
           go build -trimpath -o ./builds/windows/ -ldflags "-H windowsgui"
           dir
