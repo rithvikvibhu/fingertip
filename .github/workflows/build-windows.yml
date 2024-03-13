@@ -64,14 +64,14 @@ jobs:
           # GOBIN: /mingw64/bin
           GO111MODULE: off
         run: |
-          env
-          go env
+          # env
+          # go env
           go get github.com/akavel/rsrc
-          echo "go env GOPATH"
-          dir "$(go env GOPATH)"
-          echo "C:\Users\runneradmin\go\bin"
-          dir C:\Users\runneradmin\go\bin
-          rsrc.exe
+          # echo "go env GOPATH"
+          # dir "$(go env GOPATH)"
+          # echo "C:\Users\runneradmin\go\bin"
+          # dir C:\Users\runneradmin\go\bin
+          # rsrc.exe
 
       - name: Build fingertip
         run: |
