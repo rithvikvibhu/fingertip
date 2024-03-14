@@ -10,18 +10,15 @@
     "guid": "",
     "vars": null
   },
-  "shortcuts": {
-    "guid": "c1226d93-9b19-433a-9928-959c5c4eb41d",
-    "items": [
-      {
-        "name": "Fingertip",
-        "description": "A decentralized Handshake resolver",
-        "target": "[INSTALLDIR]\\fingertip.exe",
-        "wdir": "INSTALLDIR",
-        "arguments": "",
-        "icon": "fingertip.ico"
-      }
-    ]
-  },
+  "shortcuts": [
+    {
+      "name": "Fingertip",
+      "description": "A decentralized Handshake resolver",
+      "target": "[INSTALLDIR]\\fingertip.exe",
+      "wdir": "INSTALLDIR",
+      "arguments": "",
+      "icon": "fingertip.ico"
+    }
+  ],
   "choco": {}
 }
