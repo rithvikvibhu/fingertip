@@ -2,16 +2,10 @@
   "product": "Fingertip",
   "company": "Impervious",
   "upgrade-code": "edb4eea2-d48d-4681-86ef-2b0310e54f01",
-  "files": {
-    "guid": "767780a0-57f0-47f2-8a56-e9e6f4d544ee",
-    "items": [
-      "fingertip.exe",
-      "hnsd.exe",
-      "libcrypto-1_1-x64.dll",
-      "libunbound-8.dll",
-      "libssl-1_1-x64.dll"
-    ]
-  },
+  "files": [
+    { "path": "fingertip.exe" },
+    { "path": "hnsd.exe" }
+  ],
   "env": {
     "guid": "",
     "vars": null

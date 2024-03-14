@@ -42,6 +42,13 @@ jobs:
           path: ./hnsd.exe
           if-no-files-found: error
 
+      - name: tmp Store hnsd directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: hnsd-dir
+          path: ./
+          if-no-files-found: error
+
   build-fingertip:
     needs: build-hnsd
     runs-on: windows-latest
