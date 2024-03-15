@@ -7,9 +7,9 @@ jobs:
   build-hnsd:
     runs-on: windows-latest
 
-    defaults:
-      run:
-        shell: msys2 {0}
+    # defaults:
+    #   run:
+    #     shell: msys2 {0}
 
     steps:
       - name: Set git autocrlf
