@@ -2,9 +2,10 @@
   "product": "Fingertip",
   "company": "Impervious",
   "upgrade-code": "edb4eea2-d48d-4681-86ef-2b0310e54f01",
-  "info": {
-    "readme": "[INSTALLDIR]\\README.md"
-  },
+  "icon": "fingertip.ico",
+  "banner": "templates\\top.bmp",
+  "dialog": "templates\\bg.bmp",
+  "info": {},
   "files": [
     { "path": "fingertip.exe" },
     { "path": "hnsd.exe" }
@@ -21,8 +22,7 @@
       "target": "[INSTALLDIR]\\fingertip.exe",
       "wdir": "INSTALLDIR",
       "arguments": "",
-      "icon": "fingertip.ico",
-      "condition": "STARTMENUSHORTCUT ~= \"yes\""
+      "icon": "fingertip.ico"
     }
   ]
 }

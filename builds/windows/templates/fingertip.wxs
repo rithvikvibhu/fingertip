@@ -105,33 +105,6 @@
             </Component>
             {{end}}
 
-            <Component Id="RegistryEntriesARP" Guid="*">
-                <RegistryKey Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName]">
-                    <RegistryValue Type="string" Name="AuthorizedCDFPrefix" Value=""/>
-                    <RegistryValue Type="string" Name="Comments" Value="{{.Info.Comments}}"/>
-                    <RegistryValue Type="string" Name="Contact" Value="{{.Info.Contact}}"/>
-                    {{if gt (.Icon | len) 0 }}
-                    <RegistryValue Type="string" Name="DisplayIcon" Value="%SystemRoot%\Installer\[ProductCode]\Installer.Ico"/>
-                    {{end}}
-                    <RegistryValue Type="string" Name="DisplayName" Value="[ProductName]" KeyPath="yes"/>
-                    <RegistryValue Type="string" Name="DisplayVersion" Value="{{.Version.Display}}"/>
-                    <RegistryValue Type="integer" Name="EstimatedSize" Value="{{.Info.Size}}"/>
-                    <RegistryValue Type="string" Name="HelpLink" Value="{{.Info.HelpLink}}"/>
-                    <RegistryValue Type="string" Name="HelpTelephone" Value="{{.Info.SupportTelephone}}"/>
-                    <RegistryValue Type="string" Name="InstallDate" Value="[Date]"/>
-                    <RegistryValue Type="string" Name="InstallLocation" Value="[INSTALLDIR]"/>
-                    <RegistryValue Type="string" Name="InstallSource" Value="[SourceDir]"/>
-                    <RegistryValue Type="integer" Name="Language" Value="[ProductLanguage]"/>
-                    <RegistryValue Type="expandable" Name="ModifyPath" Value="MsiExec.exe /I[ProductCode]"/>
-                    <RegistryValue Type="string" Name="Publisher" Value="{{.Company}}"/>
-                    <RegistryValue Type="string" Name="Readme" Value="{{.Info.Readme}}"/>
-                    <RegistryValue Type="expandable" Name="UninstallString" Value="MsiExec.exe /I[ProductCode]"/>
-                    <RegistryValue Type="string" Name="URLInfoAbout" Value="{{.Info.SupportLink}}"/>
-                    <RegistryValue Type="string" Name="URLUpdateInfo" Value="{{.Info.UpdateInfoLink}}"/>
-                    <RegistryValue Type="integer" Name="Version" Value="{{.Version.Hex}}"/>
-                </RegistryKey>
-            </Component>
-
             <Directory Id="ProgramMenuFolder"/>
             <Directory Id="DesktopFolder"/>
 
@@ -204,6 +177,7 @@
         <WixVariable Id="WixUIDialogBmp" Value="C:\Users\b\go\src\fingertip\builds\windows\templates\bg.bmp" />
         <Icon Id="icon.ico" SourceFile="C:\Users\b\go\src\fingertip\builds\windows\fingertip.ico"/>
         <Property Id="ARPPRODUCTICON" Value="C:\Users\b\go\src\fingertip\builds\windows\fingertip.ico" /> -->
+
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
 
         <!-- this should help to propagate env var changes -->
