@@ -67,6 +67,7 @@
                             Key="Software\{{$.Company}}\{{$.Product}}"
                             Name="installed"
                             Type="integer" Value="1" KeyPath="yes"/>
+                        <RemoveFolder Id='RemoveLocalAppDataFolder' Directory='INSTALLDIR' On='uninstall' />
                     </Component>
                     {{end}}
 
