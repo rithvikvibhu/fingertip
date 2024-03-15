@@ -13,8 +13,8 @@ jobs:
 
     steps:
       - name: Set git autocrlf
-        run: git config --global core.autocrlf input
         shell: bash
+        run: git config --global core.autocrlf input
 
       - name: Checkout hnsd repository
         uses: actions/checkout@v4
@@ -25,7 +25,8 @@ jobs:
       - name: Get current commit hash
         id: commit_hash
         run: |
-          echo "::set-output name=hash::$(git rev-parse HEAD)"
+          # echo "::set-output name=hash::$(git rev-parse HEAD)"
+          echo "hash=$(git rev-parse HEAD)" >> $ENV:GITHUB_OUTPUT
 
       - name: Download cached hnsd binary
         uses: actions/cache@v4
@@ -46,6 +47,7 @@ jobs:
 
       - name: Build hnsd
         if: steps.cache-hnsd.outputs.cache-hit != 'true'
+        shell: msys2 {0}
         run: |
           ./autogen.sh && ./configure && make
           ls -l
