@@ -45,11 +45,11 @@
             <Directory Id="$(var.Program_Files)">
                 <Directory Id="INSTALLDIR" Name="{{.Product}}">
                     {{define "FILES"}}
-                    {{range $i, $f := .}}
+                    {{range $i, $f := .Directory.Files}}
                     <Component Id="ApplicationFiles{{$f.ID}}" Guid="*">
                         <File Id="ApplicationFile{{$f.ID}}" Source="{{$f.Path}}"/>
                         <RegistryValue Root="HKCU"
-                            Key="Software\{{.Company}}\{{.Product}}"
+                            Key="Software\{{$.Company}}\{{$.Product}}"
                             Name="installed{{$i}}"
                             Type="integer" Value="1" KeyPath="yes"/>
                         {{if $f.Service}}
@@ -70,7 +70,8 @@
                     {{end}}
                     {{end}}
 
-                    {{template "FILES" .Directory.Files}}
+                    {{template "FILES" .}}
+
                     {{define "DIRECTORIES"}}
                     {{range $d := .}}
                     <Directory Id="ApplicationDirectory{{$d.ID}}" Name="{{$d.Name}}">
