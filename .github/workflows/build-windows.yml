@@ -78,6 +78,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Install WiX
+        run: dotnet tool install --global wix
 
       - name: Install go
         uses: actions/setup-go@v5
