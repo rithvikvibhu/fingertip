@@ -160,7 +160,6 @@
             {{range $i, $r := .Registries}}
             <ComponentRef Id="RegistryEntries{{$i}}"/>
             {{end}}
-            <ComponentRef Id="RegistryEntriesARP"/>
             {{range $i, $e := .Shortcuts}}
             <ComponentRef Id="ApplicationShortcuts{{$i}}"/>
             {{end}}
