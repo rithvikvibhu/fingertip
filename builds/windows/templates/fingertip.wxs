@@ -173,9 +173,7 @@
             {{end}}
             {{$id := 0}}
             {{define "FILESREF"}}
-            {{range $f := .}}
-            <ComponentRef Id="ApplicationFiles{{$f.ID}}"/>
-            {{end}}
+            <ComponentRef Id="ApplicationFiles"/>
             {{end}}
             {{template "FILESREF" .Directory.Files}}
             {{define "DIRECTORIESREF"}}
