@@ -113,45 +113,45 @@ jobs:
           path: builds/windows
           merge-multiple: true
       
-      - name: Package as msi
-        working-directory: ./builds/windows
-        run: |
-          # adapted from: https://github.com/git-town/git-town/pull/2677
+      # - name: Package as msi
+      #   working-directory: ./builds/windows
+      #   run: |
+      #     # adapted from: https://github.com/git-town/git-town/pull/2677
 
-          Set-Variable -Name "FingertipVersion" -Value "v0.0.3" -Option Constant
-          Set-Variable -Name "GoMsiVersion" -Value "0.0.3" -Option Constant
-          Set-Variable -Name "MsiFileName" -Value "fingertip.msi" -Option Constant
+      #     Set-Variable -Name "FingertipVersion" -Value "v0.0.3" -Option Constant
+      #     Set-Variable -Name "GoMsiVersion" -Value "0.0.3" -Option Constant
+      #     Set-Variable -Name "MsiFileName" -Value "fingertip.msi" -Option Constant
 
-          # copy the files needed to build the .msi file on the C: drive to bypass this bug:
-          # https://github.com/mh-cbon/go-msi/issues/51
-          $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) "fingertip"
-          if (Test-Path $tempDir) {
-            Remove-Item -Path $tempDir -Recurse -Force
-          }
-          New-Item -Path $tempDir -ItemType Directory
-          Copy-Item -Path ".\" -Destination $tempDir -Recurse
-          # Copy-Item -Path ".\templates" -Destination $tempDir -Recurse
-          # Copy-Item -Path ".\fingertip.exe" -Destination $tempDir
-          # Copy-Item -Path ".\hnsd.exe" -Destination $tempDir
+      #     # copy the files needed to build the .msi file on the C: drive to bypass this bug:
+      #     # https://github.com/mh-cbon/go-msi/issues/51
+      #     $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) "fingertip"
+      #     if (Test-Path $tempDir) {
+      #       Remove-Item -Path $tempDir -Recurse -Force
+      #     }
+      #     New-Item -Path $tempDir -ItemType Directory
+      #     Copy-Item -Path ".\" -Destination $tempDir -Recurse
+      #     # Copy-Item -Path ".\templates" -Destination $tempDir -Recurse
+      #     # Copy-Item -Path ".\fingertip.exe" -Destination $tempDir
+      #     # Copy-Item -Path ".\hnsd.exe" -Destination $tempDir
 
-          # change into the temp dir
-          $currentDir = Get-Location
-          Set-Location -Path $tempDir
+      #     # change into the temp dir
+      #     $currentDir = Get-Location
+      #     Set-Location -Path $tempDir
 
-          # build the .msi file in the temp dir
-          go-msi make --msi $MsiFileName --version $FingertipVersion --src templates --arch amd64
+      #     # build the .msi file in the temp dir
+      #     go-msi make --msi $MsiFileName --version $FingertipVersion --src templates --arch amd64
 
-          # go back to the Git workspace
-          Set-Location $currentDir
+      #     # go back to the Git workspace
+      #     Set-Location $currentDir
 
-          # copy the .msi file into the Git workspace
-          $msiPath = Join-Path $tempDir $MsiFileName
-          Copy-Item -Path $msiPath -Destination $currentDir
+      #     # copy the .msi file into the Git workspace
+      #     $msiPath = Join-Path $tempDir $MsiFileName
+      #     Copy-Item -Path $msiPath -Destination $currentDir
 
-          # delete the temp dir
-          Remove-Item -Path $tempDir -Recurse -Force
+      #     # delete the temp dir
+      #     Remove-Item -Path $tempDir -Recurse -Force
 
-          dir
+      #     dir
 
       - name: Store fingertip binary
         uses: actions/upload-artifact@v4
@@ -160,9 +160,9 @@ jobs:
           path: ./builds/windows/fingertip.exe
           if-no-files-found: error
 
-      - name: Store fingertip installer
-        uses: actions/upload-artifact@v4
-        with:
-          name: fingertip-msi
-          path: ./builds/windows/*.msi
-          if-no-files-found: error
+      # - name: Store fingertip installer
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: fingertip-msi
+      #     path: ./builds/windows/*.msi
+      #     if-no-files-found: error
