@@ -46,7 +46,7 @@
                 <Directory Id="INSTALLDIR" Name="{{.Product}}">
                     {{define "FILES"}}
                     {{range $i, $f := .Directory.Files}}
-                    <Component Id="ApplicationFiles{{$f.ID}}" Guid="*">
+                    <Component Id="ApplicationFiles{{$f.ID}}" Guid="767780a0-57f0-47f2-8a56-e9e6f4d544ee">
                         <File Id="ApplicationFile{{$f.ID}}" Source="{{$f.Path}}"/>
                         <RegistryValue Root="HKCU"
                             Key="Software\{{$.Company}}\{{$.Product}}"
