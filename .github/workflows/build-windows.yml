@@ -85,6 +85,10 @@ jobs:
       - name: Install WiX
         run: dotnet tool install --global wix
 
+      - name: Add WiX toolkit to PATH
+        shell: bash
+        run: echo "${WIX}bin" >> $GITHUB_PATH
+
       - name: Install go
         uses: actions/setup-go@v5
         with:
@@ -94,7 +98,7 @@ jobs:
         env:
           GO111MODULE: off
         run: |
-          # env
+          env
           # go env
           go get github.com/akavel/rsrc
           go get github.com/mat007/go-msi
