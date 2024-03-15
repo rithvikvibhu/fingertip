@@ -12,14 +12,6 @@ jobs:
         shell: msys2 {0}
 
     steps:
-      - name: Setup mysys2 and install dependencies
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: MINGW64
-          path-type: inherit
-          update: false # TODO: change to true later
-          install: git mingw-w64-x86_64-toolchain base-devel mingw-w64-x86_64-unbound autotools
-
       - name: Set git autocrlf
         run: git config --global core.autocrlf input
         shell: bash
@@ -34,13 +26,6 @@ jobs:
         id: commit_hash
         run: |
           echo "::set-output name=hash::$(git rev-parse HEAD)"
-        
-      # - name: Download cached hnsd binary
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: hnsd-bin-${{ steps.commit_hash.outputs.hash }}
-      #     path: ./
-      #   # continue-on-error: true # Add this to continue if no artifact is found
 
       - name: Download cached hnsd binary
         uses: actions/cache@v4
@@ -50,8 +35,16 @@ jobs:
           path: |
             ./hnsd.exe
 
+      - name: Setup mysys2 and install dependencies
+        if: steps.cache-hnsd.outputs.cache-hit != 'true'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          path-type: inherit
+          update: false # TODO: change to true later
+          install: git mingw-w64-x86_64-toolchain base-devel mingw-w64-x86_64-unbound autotools
+
       - name: Build hnsd
-        # if: ${{ failure() }} # Run this step if the previous step failed (no cached artifact found)
         if: steps.cache-hnsd.outputs.cache-hit != 'true'
         run: |
           ./autogen.sh && ./configure && make

@@ -9,7 +9,7 @@
             Manufacturer="{{.Company}}"
             Language="1033">
 
-      <Package InstallerVersion="600" Compressed="yes" Description="{{.Product}} {{.Version.Display}}"
+      <Package InstallerVersion="500" Compressed="yes" Description="{{.Product}} {{.Version.Display}}"
                Comments="This installs {{.Product}} {{.Version.Display}}" InstallScope="perUser" InstallPrivileges="limited" />
 
       <MediaTemplate EmbedCab="yes" {{if gt (.Compression | len) 0}}CompressionLevel="{{.Compression}}"{{end}}/>
