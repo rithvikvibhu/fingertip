@@ -48,10 +48,6 @@
                     <Component Id="ApplicationFiles" Guid="767780a0-57f0-47f2-8a56-e9e6f4d544ee">
                         {{range $i, $f := .Directory.Files}}
                         <File Id="ApplicationFile{{$f.ID}}" Source="{{$f.Path}}"/>
-                        <RegistryValue Root="HKCU"
-                            Key="Software\{{$.Company}}\{{$.Product}}"
-                            Name="installed{{$i}}"
-                            Type="integer" Value="1" KeyPath="yes"/>
                         {{if $f.Service}}
                         <ServiceInstall Id="ServiceInstall{{$f.ID}}" Type="ownProcess" Name="{{$f.Service.Name}}" Start="{{$f.Service.Start}}" Account="LocalSystem" ErrorControl="normal"
                             {{if gt ($f.Service.DisplayName | len) 0}} DisplayName="{{$f.Service.DisplayName}}" {{end}}
@@ -67,6 +63,10 @@
                         <ServiceControl Id="ServiceControl{{$f.ID}}" Name="{{$f.Service.Name}}" Start="install" Stop="both" Remove="uninstall"/>
                         {{end}}
                         {{end}}
+                        <RegistryValue Root="HKCU"
+                            Key="Software\{{$.Company}}\{{$.Product}}"
+                            Name="installed"
+                            Type="integer" Value="1" KeyPath="yes"/>
                     </Component>
                     {{end}}
 
