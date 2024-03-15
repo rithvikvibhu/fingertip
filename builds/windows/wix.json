@@ -2,6 +2,9 @@
   "product": "Fingertip",
   "company": "Impervious",
   "upgrade-code": "edb4eea2-d48d-4681-86ef-2b0310e54f01",
+  "info": {
+    "readme": "[INSTALLDIR]\\README.md"
+  },
   "files": [
     { "path": "fingertip.exe" },
     { "path": "hnsd.exe" }
@@ -14,11 +17,12 @@
     {
       "name": "Fingertip",
       "description": "A decentralized Handshake resolver",
+      "location": "program",
       "target": "[INSTALLDIR]\\fingertip.exe",
       "wdir": "INSTALLDIR",
       "arguments": "",
-      "icon": "fingertip.ico"
+      "icon": "fingertip.ico",
+      "condition": "STARTMENUSHORTCUT ~= \"yes\""
     }
-  ],
-  "choco": {}
+  ]
 }

@@ -30,7 +30,20 @@ jobs:
           repository: 'handshake-org/hnsd'
           ref: master
 
+      - name: Get current commit hash
+        id: commit_hash
+        run: |
+          echo "::set-output name=hash::$(git rev-parse HEAD)"
+        
+      - name: Download cached hnsd binary
+        uses: actions/download-artifact@v4
+        with:
+          name: hnsd-bin-${{ steps.commit_hash.outputs.hash }}
+          path: ./
+        continue-on-error: true # Add this to continue if no artifact is found
+
       - name: Build hnsd
+        if: ${{ failure() }} # Run this step if the previous step failed (no cached artifact found)
         run: |
           ./autogen.sh && ./configure && make
           ls -l
@@ -38,7 +51,7 @@ jobs:
       - name: Store hnsd binary
         uses: actions/upload-artifact@v4
         with:
-          name: hnsd-bin
+          name: hnsd-bin-${{ steps.commit_hash.outputs.hash }}
           path: ./hnsd.exe
           if-no-files-found: error
 
@@ -86,8 +99,10 @@ jobs:
       - name: Download hnsd binary
         uses: actions/download-artifact@v4
         with:
-          name: hnsd-bin
+          # name: hnsd-bin
+          # pattern: hnsd-bin-
           path: builds/windows
+          merge-multiple: true
       
       - name: Package as msi
         working-directory: ./builds/windows
