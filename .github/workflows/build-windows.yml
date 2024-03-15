@@ -49,6 +49,7 @@ jobs:
           ls -l
 
       - name: Store hnsd binary
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: hnsd-bin-${{ steps.commit_hash.outputs.hash }}
@@ -56,6 +57,7 @@ jobs:
           if-no-files-found: error
 
       - name: tmp Store hnsd directory
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: hnsd-dir
