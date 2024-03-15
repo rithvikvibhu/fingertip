@@ -40,7 +40,7 @@ jobs:
         with:
           name: hnsd-bin-${{ steps.commit_hash.outputs.hash }}
           path: ./
-        continue-on-error: true # Add this to continue if no artifact is found
+        # continue-on-error: true # Add this to continue if no artifact is found
 
       - name: Build hnsd
         if: ${{ failure() }} # Run this step if the previous step failed (no cached artifact found)
