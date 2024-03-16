@@ -14,8 +14,9 @@ const (
 	DefaultRootAddr         = "127.0.0.1:9591"
 	DefaultRecursiveAddr    = "https://hnsdoh.com/dns-query"
 	DefaultEthereumEndpoint = "https://mainnet.infura.io/v3/b0933ce6026a4e1e80e89e96a5d095bc"
-	DefaultExternalService  = "https://sdaneproofs.htools.work/proofs/"
 )
+
+var DefaultExternalService = []string{"https://sdaneproofs.htools.work/proofs/"}
 
 // User Represents user facing configuration
 type User struct {

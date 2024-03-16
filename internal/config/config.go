@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
+	"math/rand"
 	"net/http"
 	"os"
 	"path"
@@ -172,6 +173,12 @@ func NewConfig() (*App, error) {
 	if c.Path, err = getOrCreateDir(); err != nil {
 		return nil, fmt.Errorf("failed creating config: %v", err)
 	}
+
+	//randomizing the order of external services
+	rand.Shuffle(len(DefaultExternalService),
+		func(i, j int) {
+			DefaultExternalService[i], DefaultExternalService[j] = DefaultExternalService[j], DefaultExternalService[i]
+		})
 
 	c.Proxy.Constraints = tld.NameConstraints
 	c.Proxy.SkipNameChecks = false

@@ -353,5 +353,5 @@ func getProcPath() (string, error) {
 func init() {
 	// in the footer on errors
 	// 0.6.1 is the version used in go.mod
-	sane.Version = fmt.Sprintf("0.6.1 - fingertip (v%s)", Version)
+	sane.Version = fmt.Sprintf("fingertip (v%s)", Version)
 }
