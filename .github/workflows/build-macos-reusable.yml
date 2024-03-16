@@ -57,9 +57,11 @@ jobs:
 
       - name: Build fingertip
         run: |
+          chmod +x builds/macos/Fingertip.app/Contents/MacOS/hnsd
           dylibbundler -od -b -x builds/macos/Fingertip.app/Contents/MacOS/hnsd -d builds/macos/Fingertip.app/Contents/Frameworks -p @executable_path/../Frameworks/
           ./builds/macos/build.sh
           ls -l builds/macos
+          ls -l builds/macos/Fingertip.app/Contents/MacOS
 
       - name: Create DMG
         working-directory: ./builds/macos
