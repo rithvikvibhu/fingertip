@@ -47,6 +47,7 @@ jobs:
             mingw-w64-x86_64-expat
 
       - name: Checkout Unbound repository at ${{ env.UNBOUND_REF }}
+        if: steps.cache-libunbound.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
           repository: NLnetLabs/unbound
