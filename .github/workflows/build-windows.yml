@@ -29,6 +29,11 @@ jobs:
           path: |
             .libs/libunbound-8.dll
 
+      - name: tmp
+        run: |
+          dir
+          dir .libs
+
       - name: Setup MSYS2
         if: steps.cache-libunbound.outputs.cache-hit != 'true'
         uses: msys2/setup-msys2@v2
@@ -198,7 +203,7 @@ jobs:
         run: |
           # adapted from: https://github.com/git-town/git-town/pull/2677
 
-          dir builds/windows
+          dir
           Set-PSDebug -Trace 1
           Set-Variable -Name "FingertipVersion" -Value "v0.0.3" -Option Constant
           Set-Variable -Name "GoMsiVersion" -Value "0.0.2" -Option Constant
