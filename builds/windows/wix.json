@@ -7,8 +7,15 @@
   "dialog": "templates\\bg.bmp",
   "info": {},
   "files": [
-    { "path": "fingertip.exe" },
-    { "path": "hnsd.exe" }
+    {
+      "path": "fingertip.exe"
+    },
+    {
+      "path": "hnsd.exe"
+    },
+    {
+      "path": "libunbound-8.dll"
+    }
   ],
   "env": {
     "guid": "",

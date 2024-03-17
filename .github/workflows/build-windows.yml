@@ -1,7 +1,17 @@
 name: Build and Package - Windows
 
-on: [push, pull_request, workflow_dispatch]
+# on: [push, pull_request, workflow_dispatch]
 # on: [workflow_dispatch]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
 
 jobs:
   build-hnsd:
@@ -30,6 +40,11 @@ jobs:
           key: hnsd-bin-${{ steps.commit_hash.outputs.hash }}
           path: |
             ./hnsd.exe
+            ./libunbound-8.dll
+
+        # move to after hnsd?
+      - name: Build unbound
+        uses: ./.github/workflows/build-unbound.yml
 
       - name: Setup mysys2 and install dependencies
         if: steps.cache-hnsd.outputs.cache-hit != 'true'
@@ -46,23 +61,27 @@ jobs:
         run: |
           ./autogen.sh && ./configure && make
           ls -l
+          ldd hnsd.exe
 
       - name: Setup tmate session
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
         uses: mxschmitt/action-tmate@v3
 
       - name: Store hnsd binary
         uses: actions/upload-artifact@v4
         with:
           name: hnsd-bin-${{ steps.commit_hash.outputs.hash }}
-          path: ./hnsd.exe
+          path: |
+            ./hnsd.exe
+            ./libunbound-8.dll
           if-no-files-found: error
 
-      - name: tmp Store hnsd directory
-        uses: actions/upload-artifact@v4
-        with:
-          name: hnsd-dir
-          path: ./
-          if-no-files-found: error
+      # - name: tmp Store hnsd directory
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: hnsd-dir
+      #     path: ./
+      #     if-no-files-found: error
 
   build-fingertip:
     needs: build-hnsd
@@ -108,12 +127,12 @@ jobs:
       - name: Download hnsd binary
         uses: actions/download-artifact@v4
         with:
-          # name: hnsd-bin
-          # pattern: hnsd-bin-
+          pattern: hnsd-bin-
           path: builds/windows
           merge-multiple: true
 
       - name: Setup tmate session
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
         uses: mxschmitt/action-tmate@v3
 
       - name: Package as msi
