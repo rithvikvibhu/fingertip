@@ -184,8 +184,8 @@ func main() {
 			onBoarded = true
 		}()
 		app.config.Debug.SetCheckSynced(func() bool { return false }) //perhaps not the best way to show syncing status correctly
-		sync.GetRoots(hnsdPath, app.config.Path, hnsdCheckpointPath)
 		go func() {
+			sync.GetRoots(hnsdPath, app.config.Path, hnsdCheckpointPath)
 			for {
 				time.Sleep(24 * time.Hour)
 				sync.GetRoots(hnsdPath, app.config.Path, hnsdCheckpointPath)
