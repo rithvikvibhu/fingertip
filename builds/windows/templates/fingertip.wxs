@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 
-<?define Program_Files="LocalAppDataFolder"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
     <Product Id="*" UpgradeCode="{{.UpgradeCode}}"
@@ -42,7 +41,7 @@
 
         <Directory Id="TARGETDIR" Name="SourceDir">
 
-            <Directory Id="ProgramFiles64Folder">
+            <Directory Id="Program_Files">
                 <Directory Id="INSTALLDIR" Name="{{.Product}}">
                     {{define "FILES"}}
                     {{range $i, $f := .Directory.Files}}
