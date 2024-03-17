@@ -21,7 +21,6 @@ jobs:
       - name: Get current commit hash
         id: commit_hash
         run: |
-          # echo "::set-output name=hash::$(git rev-parse HEAD)"
           echo "hash=$(git rev-parse HEAD)" >> $ENV:GITHUB_OUTPUT
 
       - name: Download cached hnsd binary
@@ -113,6 +112,9 @@ jobs:
           # pattern: hnsd-bin-
           path: builds/windows
           merge-multiple: true
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Package as msi
         working-directory: ./builds/windows
