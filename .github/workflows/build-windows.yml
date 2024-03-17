@@ -7,10 +7,6 @@ jobs:
   build-hnsd:
     runs-on: windows-latest
 
-    # defaults:
-    #   run:
-    #     shell: msys2 {0}
-
     steps:
       - name: Set git autocrlf
         shell: bash
@@ -52,6 +48,9 @@ jobs:
           ./autogen.sh && ./configure && make
           ls -l
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Store hnsd binary
         uses: actions/upload-artifact@v4
         with:
@@ -73,12 +72,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
-
-      # - name: Install WiX
-      #   run: dotnet tool install --global wix
 
       - name: Add WiX toolkit to PATH
         shell: bash
@@ -117,7 +113,7 @@ jobs:
           # pattern: hnsd-bin-
           path: builds/windows
           merge-multiple: true
-      
+
       - name: Package as msi
         working-directory: ./builds/windows
         run: |
