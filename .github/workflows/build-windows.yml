@@ -22,6 +22,10 @@ jobs:
         shell: bash
         run: git config --global core.autocrlf input
 
+      # move to after hnsd?
+      - name: Build unbound
+        uses: ./.github/workflows/build-unbound.yml
+
       - name: Checkout hnsd repository
         uses: actions/checkout@v4
         with:
@@ -41,10 +45,6 @@ jobs:
           path: |
             ./hnsd.exe
             ./libunbound-8.dll
-
-        # move to after hnsd?
-      - name: Build unbound
-        uses: ./.github/workflows/build-unbound.yml
 
       - name: Setup mysys2 and install dependencies
         if: steps.cache-hnsd.outputs.cache-hit != 'true'
