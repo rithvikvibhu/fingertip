@@ -10,7 +10,7 @@ working_dir=$(pwd)
 bundle_path="${working_dir}/builds/macos/Fingertip.app/Contents/"
 hnsd_path=${bundle_path}/MacOS/hnsd
 fingertip_path=${bundle_path}/MacOS/fingertip
-lib_dir=${bundle_path}/Frameworks/
+lib_dir=${bundle_path}/Frameworks
 
 if [ ! -e "$hnsd_path" ]; then
 
