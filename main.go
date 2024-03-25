@@ -159,8 +159,6 @@ func main() {
 		log.Fatal(err)
 	}
 	hnsdPath = path.Join(hnsdPath, "/hnsd")
-	home, _ := os.UserHomeDir()
-	hnsdCheckpointPath := path.Join(home, ".hnsd")
 
 	start := func() {
 		ui.Data.SetOptionsEnabled(true)
@@ -184,11 +182,11 @@ func main() {
 			onBoarded = true
 		}()
 		app.config.Debug.SetCheckSynced(func() bool { return false }) //perhaps not the best way to show syncing status correctly
-		sync.GetRoots(hnsdPath, app.config.Path, hnsdCheckpointPath)
+		sync.GetRoots(hnsdPath, app.config.Path, app.config.Path)
 		go func() {
 			for {
 				time.Sleep(24 * time.Hour)
-				sync.GetRoots(hnsdPath, app.config.Path, hnsdCheckpointPath)
+				sync.GetRoots(hnsdPath, app.config.Path, app.config.Path)
 			}
 		}()
 		app.config.Debug.SetCheckSynced(func() bool { return true })
